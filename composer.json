@@ -1,0 +1,20 @@
+{
+    "name": "commerce/sory",
+    "description": "\"Mon blog de commerce\"",
+    "authors": [
+        {
+            "name": "SoryKABA",
+            "email": "skabaisidk@groupeisi.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "App/"
+        }
+    },
+    "require": {
+        "fakerphp/faker": "1.23.0",
+        "vlucas/valitron": "1.4.11",
+        "symfony/var-dumper": "6.3.3"
+    }
+}
