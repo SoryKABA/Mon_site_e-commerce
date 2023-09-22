@@ -61,7 +61,7 @@ HTML;
             return $this->data[$name] ?? null;
         }
         $key = 'get' . str_replace(' ', '', ucwords(str_replace('_', ' ', $name)));
-        return $this->data->$key() ?: '';
+        return $this->data->$key() ?? null;
     }
 
     public function textarea($name, $label)
@@ -80,18 +80,18 @@ HTML;
     {
 
         $fields = [];
-        if (is_array($options)) {
-            foreach ($options as $key => $option) {
-                $selected = $option == $this->data->getStatut() ?? null;
-                $fields[] = "<option value='{$option}' $selected>{$option}</option>";
-            }
-        }else {
+        // if (is_array($options)) {
+        //     foreach ($options as $key => $option) {
+        //         //$selected = $option == $this->data->getStatut() ?? null;
+        //         $fields[] = "<option value='{$option}'>{$option}</option>";
+        //     }
+        // }else {
 
             $key = 'get' . str_replace(' ', '', ucwords(str_replace('_', ' ', $name)));
             foreach ($options as $option) {
                 $selected = (int)$option->getId() === $this->data->$key() ? 'selected' : null;
                 $fields[] = "<option value='{$option->getId()}' $selected>{$option->getName()}</option>";
-            }
+            //}
         }
         $selectHtml = implode('', $fields);
         return <<<HTML

@@ -1,8 +1,11 @@
 <?php
 
+use App\PaginatedQuery\PaginatedQuery;
+
 $category = App::getInstance()->getTable('category')->find($_GET['id']);
 
-$posts = App::getInstance()->getTable('post')->findPosts($_GET['id']);
+$posts = App::getInstance()->getTable('post')->findPosts($_GET['id'])[0];
+$paginatedQuery = App::getInstance()->getTable('post')->findPosts($_GET['id'])[1];
 
 
 ?>
@@ -15,10 +18,10 @@ $posts = App::getInstance()->getTable('post')->findPosts($_GET['id']);
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>#ID</th>
-                <th>NOM</th>
-                <th>PRIX</th>
-                <th>SIZE</th>
+                <th><?= PaginatedQuery::tableHelper('id', '#ID', $_GET) ?></th>
+                <th><?= PaginatedQuery::tableHelper('nom', 'NOM', $_GET) ?></th>
+                <th><?= PaginatedQuery::tableHelper('price', 'PRIX', $_GET) ?></th>
+                <th><?= PaginatedQuery::tableHelper('id_size', 'SIZE', $_GET) ?></th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -38,6 +41,10 @@ $posts = App::getInstance()->getTable('post')->findPosts($_GET['id']);
                     </td>
                 </tr>
             <?php endforeach ?>
+            <div class="d-flex justify-content-between m-2">
+                <div><?= $paginatedQuery->nextPage('categoryposts', 'p')?></div>
+                <div><?= $paginatedQuery->previousPage('categoryposts', 'p')?></div>
+            </div>
         </tbody>
     </table>
 </div>

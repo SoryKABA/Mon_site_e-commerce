@@ -29,9 +29,15 @@ class MysqlDatabase extends Database {
         return $data;
     }
 
-    public function queryCount($statement) 
+    public function queryCount($statement, $attribute = null) 
     {
-        $query = $this->getPDO()->query($statement);
+        
+        if ($attribute) {
+            $query = $this->getPDO()->prepare($statement);  
+            $query->execute($attribute);
+        }else {
+            $query = $this->getPDO()->query($statement);
+        }
         $query->setFetchMode(PDO::FETCH_NUM);
         $data = $query->fetch()[0];
         return $data;

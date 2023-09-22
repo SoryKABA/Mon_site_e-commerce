@@ -92,4 +92,9 @@ class CustomerModele extends Modele{
 
         return $this;
     }
+
+    public function getStatut()
+    {
+        return 0;
+    }
 }

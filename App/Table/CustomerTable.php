@@ -14,7 +14,7 @@ class CustomerTable extends Table{
         $ok = $this->create([
             'customername' => $customer->getCustomername(),
             'customermail' => $customer->getCustomermail(),
-            'customerpassword' => $customer->getCustomerpassword()
+            'customerpassword' => password_hash($customer->getCustomerpassword(), PASSWORD_BCRYPT)
         ]);
         $customer->setId($ok);
         if ($ok) {
@@ -28,7 +28,7 @@ class CustomerTable extends Table{
         $ok = $this->update([
             'customername' => $customer->getCustomername(),
             'customermail' => $customer->getCustomermail(),
-            'customerpassword' => $customer->getCustomerpassword()
+            'customerpassword' => password_hash($customer->getCustomerpassword(), PASSWORD_BCRYPT)
         ], $customer->getId());
 
         if ($ok) {

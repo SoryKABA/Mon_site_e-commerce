@@ -38,6 +38,10 @@
                     </li>
                 </ul>
             </div>
+            <form class="d-flex" method="GET">
+                <input class="form-control me-2" type="search" name="q" placeholder="Search" value="<?= htmlentities($_GET['q'] ?? '') ?>" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
         </div>
     </nav>
 

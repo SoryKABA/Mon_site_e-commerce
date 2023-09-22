@@ -1,7 +1,7 @@
 <?php
 $errors = false;
 if (!empty($_POST)) {
-   if ($app->getDbAuth()->login($_POST['adressemail'], $_POST['password'])) {
+   if ($app->getDbAuth('User')->login($_POST['adressemail'], $_POST['password'])) {
         header("Location: admin.php");
    }else {
         $errors = true;

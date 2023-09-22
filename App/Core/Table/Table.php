@@ -29,9 +29,12 @@ class Table {
         }
     }
 
-    public function countQuery()
-    {
-        return $this->db->queryCount("SELECT COUNT(id) FROM {$this->table}");
+    public function countQuery($statement, $attribute = null)
+    { 
+        if ($attribute !== null) {
+            return $this->db->queryCount($statement, $attribute);
+        }
+        return $this->db->queryCount($statement);
     }
 
     public function all()

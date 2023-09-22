@@ -1,7 +1,13 @@
 <?php
-$user = App::getInstance()->getTable('user')->find($_SESSION['auth']);
-$posts = $app->getTable('post')->allWithCategoriAndSIze();
 
+use App\PaginatedQuery\PaginatedQuery;
+use App\PaginatedQuery\URL;
+
+$user = App::getInstance()->getTable('user')->find($_SESSION['auth']);
+$posts = $app->getTable('post')->allWithCategoriAndSIze()[0];
+$paginated = $app->getTable('post')->allWithCategoriAndSIze()[1];
+
+//dd($_GET);
 ?>
 
 <div class="container m-3">
@@ -18,11 +24,11 @@ $posts = $app->getTable('post')->allWithCategoriAndSIze();
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>#ID</th>
-                <th>NOM</th>
-                <th>PRIX</th>
-                <th>CATEGORIE</th>
-                <th>SIZE</th>
+                <th><?= PaginatedQuery::tableHelper('id', '#ID', $_GET) ?></th>
+                <th><?= PaginatedQuery::tableHelper('nom', 'NOM', $_GET) ?></th>
+                <th><?= PaginatedQuery::tableHelper('price', 'PRIX', $_GET) ?></th>
+                <th><?= PaginatedQuery::tableHelper('id_category', 'CATEGORIE', $_GET) ?></th>
+                <th><?= PaginatedQuery::tableHelper('id_size', 'SIZE', $_GET) ?></th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -45,6 +51,10 @@ $posts = $app->getTable('post')->allWithCategoriAndSIze();
                     <?php endif ?>
                 </tr>
             <?php endforeach ?>
+            <div class="d-flex justify-content-between m-2">
+                <div><?= $paginated->nextPage('index', 'p')?></div>
+                <div><?= $paginated->previousPage('index', 'p')?></div>
+            </div>
         </tbody>
     </table>
 </div>

@@ -2,24 +2,28 @@
 
 use App\HTML\Form;
 use App\Objection\Objection;
+use PHPMailer\PHPMailer\SMTP;
 use App\Modele\CustomerModele;
+use PHPMailer\PHPMailer\PHPMailer;
 use App\Validator\CustomerValidator;
 
 $posts = App::getInstance()->getTable('post')->all();
 $categories = App::getInstance()->getTable('category')->all();
 App::getInstance()->getTable('view')->updateViews();
-
 $customer = new CustomerModele();
 $table = App::getInstance()->getTable('customer');
 $errors = [];
+
+$mail = new PHPMailer(true);
+
 if (!empty($_POST)) {
     $p = new CustomerValidator($_POST, $table);
     Objection::objet($customer, $_POST, ['customername', 'customermail', 'customerpassword']);
     if ($p->validate()) {
         $table->createCustomer($customer);
+        
     }else {
         $errors[] = $p->errors();
-        dd("Erreur d'enregistrement");
     }
 }
 

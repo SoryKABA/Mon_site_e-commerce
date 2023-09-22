@@ -35,9 +35,11 @@ class App {
         return new $class_name($this->getDB());
     }
 
-    public function getDbAuth()
+    public function getDbAuth($class_name)
     {
-        return new DbAuth($this->getDB());
+        $class = 'Auth' . ucfirst($class_name);
+        $class = 'App\\Core\\DbAuth\\' . $class;
+        return new $class($this->getDB());
     }
 
     public function getTitle() 

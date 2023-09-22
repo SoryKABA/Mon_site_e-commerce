@@ -5,8 +5,8 @@ require dirname(__DIR__) . '/App/App.php';
 $app = App::getInstance();
 $app->load();
 //session_destroy();
-if (!$app->getDbAuth()->logged()) {
-    die('Accès refusé');
+if (!$app->getDbAuth('User')->logged()) {
+    header('Location: index.php?page=login');
     exit();
 }
 

@@ -5,14 +5,14 @@ use Exception;
 
 class URL {
 
-    public static function getInt(string $name, ?int $default =  null): ?int
+    public static function sortAble(array $data, $params)
     {
-        if(!isset($_GET[$name])) return $default;
-        if($_GET[$name] === 0) return 0;
-        if (!filter_var($_GET[$name], FILTER_VALIDATE_INT)) {
-            throw new Exception("Cette page n'existe pas", 1);
-            
-        }
-        return (int)$default;
+        return http_build_query(array_merge($data, $params));
     }
+
+    public static function urlHelper(array $data, string $param, int $value )
+    {
+        return http_build_query(array_merge($data, [$param => $value]));
+    }
+    
 }

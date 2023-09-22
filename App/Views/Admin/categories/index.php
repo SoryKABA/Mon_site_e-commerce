@@ -1,6 +1,6 @@
 <?php
+$user = App::getInstance()->getTable('user')->find($_SESSION['auth']);
 $categories = App::getInstance()->getTable('category')->all();
-
 ?>
 
 <div class="container m-3">
@@ -24,6 +24,7 @@ $categories = App::getInstance()->getTable('category')->all();
                 <tr>
                     <td><?= $category->getId()?></td>
                     <td><a href="admin.php?page=categoryposts&id=<?= $category->getId() ?>"><?= $category->getName()?></a></td>
+                    <?php if(in_array($user->getStatut(), ['super admin', 'admin'])): ?>
                     <td>
                         <a class="btn btn-primary" href="admin.php?page=categoryEdit&id=<?= $category->getId()?>">Edit</a>
                         <form action="admin.php?page=categoryDelete" onsubmit="return confirm('Êtes-vous sûr de bien vouloir supprimer cet article ?')" method="POST" style="display: inline;">
@@ -31,6 +32,7 @@ $categories = App::getInstance()->getTable('category')->all();
                             <button type="submit" href="admin.php?page=categoryDelete&id=<?= $category->getId() ?>" class="btn btn-danger">SUPPRIMER</button>
                         </form>
                     </td>
+                    <?php endif ?> 
                 </tr>
             <?php endforeach ?>
         </tbody>
