@@ -11,6 +11,9 @@
     <nav class="navbar navbar-dark bg-primary"> 
         <div class="container">
             <a class="navbar-brand" href="index.php">Blog</a>
+            <?php if(isset($_SESSION['authe'])): ?>
+                <a class="navbar-brand" href="?page=newposts">New posts</a>
+            <?php endif ?>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">

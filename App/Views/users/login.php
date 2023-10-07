@@ -1,17 +1,3 @@
-<?php
-$errors = false;
-if (!empty($_POST)) {
-   if ($app->getDbAuth('User')->login($_POST['adressemail'], $_POST['password'])) {
-        header("Location: admin.php");
-   }else {
-        $errors = true;
-   }
-}
-
-
-
-?>
-
 <section class="container m-5">
     <?php if($errors): ?>
         <div class="alert alert-danger">Identifiants incorrects</div>

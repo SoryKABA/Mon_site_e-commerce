@@ -29,7 +29,7 @@ class UserTable extends Table{
         $ok = $this->update([
             'username' => $user->getUsername(),
             'userlogin' => $user->getUserlogin(),
-            'password' => $user->getPassword(),
+            'password' => password_hash($user->getPassword(), PASSWORD_DEFAULT),
             'statut' => $user->getStatut()
         ], $user->getId());
 

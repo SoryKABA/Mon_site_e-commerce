@@ -16,7 +16,7 @@
         <div class="container">
             <a class="navbar-brand" href="index.php">Home</a>
             <a class="navbar-brand" href="admin.php">Articles</a>
-            <a class="navbar-brand" href="admin.php?page=category">Catégories</a>
+            <a class="navbar-brand" href="admin.php?page=admin.categories.index">Catégories</a>
             <a class="navbar-brand" href="admin.php?page=category" title="Vues"><i class="fa-solid fa-eye"></i>
                 <?php foreach($vues as $vue):  ?>
                     <?= $vue->getNombreVues() ?>
@@ -29,11 +29,12 @@
                             Utilisateurs
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="admin.php?page=profil">Mon profil</a></li>
-                            <li><a class="dropdown-item" href="admin.php?page=users">Users</a></li>
-                            <li><a class="dropdown-item" href="admin.php?page=clients">Clients</a></li>
+                            <li><a class="dropdown-item" href="admin.php?page=admin.users.profil">Mon profil</a></li>
+                            <li><a class="dropdown-item" href="admin.php?page=admin.users.users">Users</a></li>
+                            <li><a class="dropdown-item" href="admin.php?page=admin.clients.index">Clients</a></li>
+                            <li><a class="dropdown-item" href="admin.php?page=admin.clients.sender">Envoyer de message</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="admin.php?page=logout">Se déconnecter</a></li>
+                            <li><a class="dropdown-item" href="index.php?page=users.logout">Se déconnecter</a></li>
                         </ul>
                     </li>
                 </ul>

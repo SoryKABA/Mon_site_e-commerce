@@ -1,10 +1,3 @@
-<?php
-
-$category = App::getInstance()->getTable('category')->find($_GET['id']);
-$posts = App::getInstance()->getTable('post')->findBycategories($_GET['id']);
-
-?>
-
 <div class="container my-3">
     <div class="row">
         <h2><?= $category->getName() ?></h2>

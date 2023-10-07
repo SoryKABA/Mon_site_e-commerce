@@ -64,6 +64,14 @@ class PostTable extends Table{
         ", [$id]);
     
     }
+
+    /**
+     * cette méthode newposts permet d'afficher les produits nouvellement postés
+     */
+    public function newposts()  
+    {
+        return $this->query("SELECT * FROM {$this->table} ORDER BY create_at DESC LIMIT 20");
+    }
     public function allWithCategoriAndSIze()  
     {
         $query = "SELECT p.id post_id, p.nom, p.price, p.picture, p.create_at, p.id_category, p.id_size, c.*, s.*

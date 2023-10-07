@@ -28,7 +28,17 @@ class CategoryTable extends Table{
         $category->setId($ok);
         if ($ok) {
             header(('Location: ?page=category&created=1'));
+            http_response_code(301);
             exit();
+        }
+    }
+
+    public function deleteCategory(CategoryModele $category)
+    {
+        $ok = $this->delete($category->getid());
+        if ($ok) {
+            $this->query("DELETE FROM post WHERE id_category = ?", [$category->getId()]);
+            return $ok ?? false;
         }
     }
 

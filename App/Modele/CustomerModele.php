@@ -10,6 +10,7 @@ class CustomerModele extends Modele{
     private $customername;
     private $customermail;
     private $customerpassword;
+    private $confirm;
 
     
 
@@ -96,5 +97,25 @@ class CustomerModele extends Modele{
     public function getStatut()
     {
         return 0;
+    }
+
+    /**
+     * Get the value of confirm
+     */ 
+    public function getConfirm()
+    {
+        return $this->confirm;
+    }
+
+    /**
+     * Set the value of confirm
+     *
+     * @return  self
+     */ 
+    public function setConfirm($confirm)
+    {
+        $this->confirm = $confirm;
+
+        return $this;
     }
 }

@@ -11,7 +11,7 @@ class CategoryModele extends Modele{
 
     public function getUrl()  
     {
-        return 'index.php?page=category&id=' . $this->id;
+        return 'index.php?page=categories.category&id=' . $this->id;
     }
 
     public function getName(): ?string

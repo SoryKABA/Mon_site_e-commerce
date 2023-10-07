@@ -1,17 +1,3 @@
-<?php
-$errors = false;
-if (!empty($_POST)) {
-   if ($app->getDbAuth('Customer')->login($_POST['adressemail'], $_POST['password'])) {
-        header("Location: index.php");
-   }else {
-        $errors = true;
-   }
-}
-
-
-
-?>
-
 <section class="container m-5">
     <?php if($errors): ?>
         <div class="alert alert-danger">Identifiants incorrects</div>
@@ -27,6 +13,7 @@ if (!empty($_POST)) {
         </div>
         <div class="form-group m-1">
             <button type="submit" class="btn btn-primary">Envoyer</button>
+            <a href="?page=users.newpassword" class="text text-decoration-none">Mot de passe oublié ? </a>
         </div>
     </form>
 </section>

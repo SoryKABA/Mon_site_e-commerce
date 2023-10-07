@@ -1,36 +1,7 @@
-<?php
-
-use App\HTML\Form;
-use App\Objection\Objection;
-use PHPMailer\PHPMailer\SMTP;
-use App\Modele\CustomerModele;
-use PHPMailer\PHPMailer\PHPMailer;
-use App\Validator\CustomerValidator;
-
-$posts = App::getInstance()->getTable('post')->all();
-$categories = App::getInstance()->getTable('category')->all();
-App::getInstance()->getTable('view')->updateViews();
-$customer = new CustomerModele();
-$table = App::getInstance()->getTable('customer');
-$errors = [];
-
-$mail = new PHPMailer(true);
-
-if (!empty($_POST)) {
-    $p = new CustomerValidator($_POST, $table);
-    Objection::objet($customer, $_POST, ['customername', 'customermail', 'customerpassword']);
-    if ($p->validate()) {
-        $table->createCustomer($customer);
-        
-    }else {
-        $errors[] = $p->errors();
-    }
-}
-
-$form = new Form($customer, $errors);
-
-?>
 <div class="container my-3">
+    <?php if($userExist): ?>
+        <div class="alert alert-danger m-1">Ce compte existe déjà</div>
+    <?php endif?>
     <div class="row">
         <div class="col-10">
             <div class="row">

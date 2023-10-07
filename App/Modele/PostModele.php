@@ -20,7 +20,7 @@ class PostModele extends Modele{
 
     public function getUrl()  
     {
-        return 'index.php?page=post&id=' . $this->id;
+        return 'index.php?page=posts.post&id=' . $this->id;
     }
 
     public function getExtract()  
