@@ -29,8 +29,10 @@ class PostsController extends AppController {
 
         if (!empty($_POST)) {
             $p = new PostValidator($_POST, $table);
-            Objection::objet($post, $_POST, ['nom', 'content', 'price', 'id_category', 'id_size']);
+            Objection::objet($post, $_POST, ['nom', 'picture', 'content', 'price', 'id_category', 'id_size']);
+            
             if ($p->validate()) {
+                //dd($_POST);
                 if ($this->loadModel('post')->createPost($post)) {
                     header("Location: admin.php?index&created=1");
                     http_response_code(301);
@@ -38,6 +40,7 @@ class PostsController extends AppController {
                 }
             }else {
                 $errors[] = $p->errors();
+                dd($errors);
                 
             }
             //dd($errors);

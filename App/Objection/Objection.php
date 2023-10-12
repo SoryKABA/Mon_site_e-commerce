@@ -13,11 +13,13 @@ class Objection {
                 $method = 'set' . str_replace(' ', '', ucwords(str_replace('_', ' ', $field)));
                 if ($field === 'create_at') {    
                     $object->setCreateAt((new DateTime('now'))->format('Y-m-d H:i:s'));
+                }elseif ($field === 'picture') {
+                    $object->$method($_FILES[$field]['name']);
+                }else {
+
+                    $object->$method($data[$field]);
                 }
-                if ($field === 'picture') {
-                    $object->setPicture($_FILES['picture']['name']);
-                }
-                $object->$method($data[$field]);
+                
             }
         }else {
             $method = 'set' . str_replace(' ', '', ucwords(str_replace('_', ' ', $fields)));

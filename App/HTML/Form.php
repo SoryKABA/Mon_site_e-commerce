@@ -39,20 +39,27 @@ HTML;
 
     public function feedValidator(string $key) 
     {
-        if (!empty($this->errors) && isset($this->errors)) {
+        // if (!empty($this->errors) && isset($this->errors)) {
             
-            foreach($this->errors as $error){
-                if (isset($error[$key])) {
-                    if (is_array($error[$key])) {
-                        $errors = implode('<br>', $error[$key]);
-                    }else {
-                        $errors = $error[$key];
-                    }
-                    return "<div class='invalid-feedback'>" .$errors."</div>";
-                }
+        //     //dd($this->errors);
+        //     foreach($this->errors as $error){
+        //         if (isset($error[$key])) {
+        //             dd($error[$key]);
+        //             if (is_array($error[$key])) {
+        //                 $errors = implode('<br>', $error[$key]);
+        //             }else {
+        //                 $errors = $error[$key];
+        //             }
+        //             return "<div class='invalid-feedback'>" .$errors."</div>";
+        //         }
                 
-            }
+        //     }
+        // }
+        if (isset($this->errors[$key])) {
+            dd($this->errors[$key]);
+            return "<div class='invalid-feedback'>". implode('<br>', $this->errors[$key]). "</div>";
         }
+        return '';
     }
 
     public function getValue($name) : ?string
@@ -75,7 +82,15 @@ HTML;
         </div>
 HTML;
     }
-
+    
+    /**
+     * select
+     *
+     * @param  mixed $name la clé
+     * @param  mixed $label le label du champ
+     * @param  mixed $options le tableau d'option
+     * @return void
+     */
     public function  select($name, $label, $options)
     {
 
@@ -86,18 +101,29 @@ HTML;
         //         $fields[] = "<option value='{$option}'>{$option}</option>";
         //     }
         // }else {
-
+            $optId = null;
+            $optName = null;
             $key = 'get' . str_replace(' ', '', ucwords(str_replace('_', ' ', $name)));
             foreach ($options as $option) {
-                $selected = (int)$option->getId() === $this->data->$key() ? 'selected' : null;
-                $fields[] = "<option value='{$option->getId()}' $selected>{$option->getName()}</option>";
+                if (is_object($option)) {
+                    //dd($option, $this->data->getStatut());
+                    $selected = (int)$option->getId() === $this->data->$key() ? 'selected' : null;
+                    $optId = $option->getId();
+                    $optName = $option->getName();
+                }else {
+                    $selected = $option === $this->data->getStatut() ? 'selected' : null;
+                    $optId = $option;
+                    $optName = $option;
+                }
+                $opt = 
+                $fields[] = "<option value='{$optId}' $selected>{$optName}</option>";
             //}
         }
         $selectHtml = implode('', $fields);
         return <<<HTML
             <div class="form-group">
             <label for="" class="form-label">{$label}</label>
-            <select name="{$name}" id="" class="{$this->bootstrapValidator($name)}">
+            <select name="{$name}" id="" class="{$this->bootstrapValidator($name)} form-select">
                 {$selectHtml}
             </select>
             {$this->feedValidator($name)}

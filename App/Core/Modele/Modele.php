@@ -10,10 +10,4 @@ class Modele {
         $this->$key = $this->$method();
         return $this->$key;
     }
-
-    public function all() 
-    {
-        
-    }
-
 }

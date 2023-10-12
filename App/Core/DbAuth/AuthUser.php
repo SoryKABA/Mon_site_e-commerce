@@ -31,9 +31,4 @@ class AuthUser extends DbAuth{
         }
         return false;
     }
-
-    public function logged()
-    {
-        return isset($_SESSION['auth']);
-    }
 }

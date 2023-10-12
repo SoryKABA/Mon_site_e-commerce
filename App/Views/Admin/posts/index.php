@@ -40,8 +40,8 @@
                 </tr>
             <?php endforeach ?>
             <div class="d-flex justify-content-between m-2">
-                <div><?= $paginated->nextPage('index', 'p')?></div>
-                <div><?= $paginated->previousPage('index', 'p')?></div>
+                <div><?= $paginated->nextPage('admin.posts.index', 'p')?></div>
+                <div><?= $paginated->previousPage('admin.posts.index', 'p')?></div>
             </div>
         </tbody>
     </table>

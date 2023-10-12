@@ -9,12 +9,12 @@ class AuthCustomer extends DbAuth{
 
     public function login($adressMail, $password)
     {
-        $customer = $this->db->prepare("SELECT * FROM customers WHERE customerlogin = ?", [$adressMail], null, true);
+        $customer = $this->db->prepare("SELECT * FROM customers WHERE customermail = ?", [$adressMail], null, true);
         if ($customer) {
-            if (password_verify($password, $customer->password)) {
-                if ($customer->statut === 0) {
+            if (password_verify($password, $customer->customerpassword)) {
+                if ($customer->statut === 1) {
                     
-                    $_SESSION['auth'] = $customer->id;
+                    $_SESSION['authe'] = $customer->id;
                     return true;
                 }
             }

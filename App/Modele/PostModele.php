@@ -47,7 +47,7 @@ class PostModele extends Modele{
 
     public function getPicture()
     {
-        return $this->picture;
+        return dirname(__DIR__) . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . $this->picture;
     }
 
     public function setPicture($picture)

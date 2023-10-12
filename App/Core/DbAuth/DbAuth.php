@@ -14,5 +14,10 @@ class DbAuth {
         $this->db = $db;
     }
 
+    public function logged()
+    {
+        return isset($_SESSION['auth']);
+    }
+
     
 }
